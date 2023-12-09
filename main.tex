@@ -33,12 +33,61 @@
 \maketitle
 
 \begin{questions}
-    \question Problem 2
+    \question Dave fails quizzes with probability $\dfrac{1}{4}$, independent of other quizzes.
     \begin{parts}
-        \part
+        \part What is the probability that Dave fails exactly two of the next six quizzes?
         \begin{solution}
+            \begin{align*}
+                P(\text{Dave fails exactly two of the next six quizzes}) & = \binom{6}{2} \left(\frac{1}{4}\right)^2 \left(\frac{3}{4}\right)^4 \\
+                                                                         & = 15 \times \frac{1}{16} \times \frac{81}{256}                       \\
+                                                                         & = \frac{1215}{4096}                                                  \\
+                                                                         & = 0.296875
+            \end{align*}
+        \end{solution}
+        \part What is the expected number of quizzes that Dave will pass before he has failed
+        three times?
+        \begin{solution}
+
+            No. of times he failed $= 3$ \\ Total no. of quizzes taken to fail 3 times $=
+                n$ \\
+            \begin{align*}
+                n * \frac{1}{4} = 3 \\
+                n = 12
+            \end{align*}
+            Dave takes 12 quizzes to fail 3 times. Therefore, he passes 9 quizzes. \\
+        \end{solution}
+        \part What is the probability that the second and third time Dave fails a quiz will
+        occur when he takes his eighth and ninth quizzes, respectively?
+        \begin{solution}
+
+            1st Fail $\rightarrow 1 - 7$ quizzes \\
+            2nd Fail $\rightarrow 8$th quiz \\
+            3rd Fail $\rightarrow 9$th quiz \\
+
+            \begin{align*}
+                P(X) & =P(\text{1 fail in 7 tests}) \cdot P(\text{2nd fail in 8th test}) \cdot P(\text{3rd fail in 9th test}) \\
+                     & =\binom{7}{1}\left(\frac{1}{4}\right)^1 \left(\frac{3}{4}\right)^6 \cdot \frac{1}{4} \cdot \frac{1}{4} \\
+                     & =\frac{7 \cdot 3^6}{4^9} = \frac{5103}{262144}                                                         \\
+                     & =0.0194568634
+            \end{align*}
+        \end{solution}
+        \part What is the probability that Dave fails two quizzes in a row before he passes two
+        quizzes in a row?
+        \begin{solution}
+
+            $F =$ Fail, $P =$ Pass \\
+            \begin{align*}
+                P(X) & = P(\text{Dave fails two quizzes in a row before he passes two quizzes in a row})            \\                                                                                                                       
+                     & = P(FF \cup PFF \cup FPFF \cup PFPFF \cup FPFPFF \cup \dots)                                 \\                                                                                                                      
+                     & = \dfrac{[P(F)]^2}{1 - P(F) \cdot P(P)} + \dfrac{P(P) \cdot [P(F)]^2}{1 - P(F) \cdot P(P)}   \\
+                     & = \dfrac{\left(\frac{1}{4}\right)^2}{1 - \frac{1}{4} \cdot \frac{3}{4}} + \dfrac{\frac{3}{4} \cdot \left(\frac{1}{4}\right)^2}{1 - \frac{1}{4} \cdot \frac{3}{4}} \\
+                     & = \dfrac{7}{52}
+            \end{align*}
+
         \end{solution}
     \end{parts}
+
+    
 \end{questions}
 
 \end{document}
