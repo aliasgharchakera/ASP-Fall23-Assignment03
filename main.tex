@@ -519,6 +519,44 @@
             with non zero probability. Therefore, the Markov chain is irreducible.
         \end{solution}
     \end{parts}
+
+    \question{\textbf{11.42}}
+    
+    A rechargeable battery in a depot is in one of three states: fully charged, in use, or recharging. Assume the mean time in each of these states is: $\frac{1}{\lambda}$; 1 hour; 3 hours. Batteries are not put into use unless they are fully charged.
+
+    \begin{parts}
+        \part Find a Markov model for the battery states and sketch the state transition diagram.
+        \begin{solution}
+            Let $X_n$ be the state of the battery at time $n$. The state space is $\{1, 2, 3\}$, where 1 represents the fully charged state, 2 represents the in use state, and 3 represents the recharging state. The transition probabilities are given by:
+
+            \begin{align*}
+                P_{12} & = 1 \\
+                P_{23} & = 1 \\
+                P_{31} & = 1
+            \end{align*}
+
+            The state transition diagram is:
+
+            \begin{tikzpicture}[->, >=stealth, auto, semithick, node distance=2cm]
+                \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+                \node[circle, draw]    (A)                     {$1$};
+                \node[circle, draw]    (B)[below right of=A]   {$2$};
+                \node[circle, draw]    (C)[below left of=A]   {$3$};
+
+                \path
+                (A) edge[bend left]  node{$1$}         (B)
+                (B) edge[bend left]  node{$1$}         (C)
+                (C) edge[bend left]  node{$1$}         (A);
+            \end{tikzpicture}
+            
+        \end{solution}
+
+        \part Find the stationary pmf. Explain how the pmf varies with $\lambda$
+        \begin{solution}
+            
+        \end{solution}
+        
+    \end{parts}
 \end{questions}
 
 \end{document}
