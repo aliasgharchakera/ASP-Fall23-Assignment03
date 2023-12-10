@@ -104,15 +104,14 @@
         \part Find the probability that a task from user 1 is executed for the first time during
         the 4th slot.
         \begin{solution}
-            If a task from user 1 is executed for the first time during the 4th slot, then the task from user 1 is not executed in the first 3 slots
-            (they are busy and not accepting from user 1) and is executed in the 4th slot (4th slot maybe idle and execute or busy and execute). \\
+            During each slot, the probability of a task from user 1 is given by,
+
+            \(p_1 = p_{1|B} \cdot p_B =(\frac{5}{6})  (\frac{2}{5}) = \frac{1}{3}\)
+
+            Tasks from user 1 form a Bernoulli process and
             \begin{align*}
-                 & P(T_1 \text{ is executed for the first time during the 4th slot})                                                                                  \\
-                 & = P(T_1 \text{ is not executed in the first 3 slots}) \cdot P(T_1 \text{ is executed in the 4th slot})                                             \\
-                 & = \left(\frac{5}{6} \times \frac{3}{5}\right)^3 \cdot \left[\left(\frac{1}{6} \times 1\right) + \left(\frac{5}{6} \times \frac{2}{5}\right)\right] \\
-                 & = \left(\frac{1}{2}\right)^3 \cdot \left[\frac{1}{6} + \frac{1}{3}\right]                                                                          \\
-                 & = \frac{1}{8} \cdot \frac{1}{2}                                                                                                                    \\
-                 & = \frac{1}{16}                                                                                                                                     \\
+                P(T_1 \text{ is executed in 4th slot}) & = p_1 (1 - p_1)^3 = \dfrac{1}{3} \cdot \left(\dfrac{2}{3}\right)^3 \\
+                                                       & = \dfrac{8}{81} = 0.0987654                                        \\
             \end{align*}
         \end{solution}
 
@@ -132,50 +131,46 @@
 
         \part Find the expected number of slots up to and including the 5th task from user 1.
         \begin{solution}
-            Probability of a task from user 1.
+            Each slot contains a task from user 1 with probability $p_1 = \frac{1}{3}$, independent of other slots. The time of the 5th task from user 1 is a Pascal random variable of order 5, with parameter $p_1 = \frac{1}{3}$. Its mean is given by
             \begin{align*}
-                P(T_1) & = P_I \cdot P_{1|I} + P_B \cdot P_{1|B}               \\
-                       & = \frac{1}{6} \cdot 1 + \frac{5}{6} \cdot \frac{2}{5} \\
-                       & = \frac{1}{6} + \frac{1}{3}                           \\
-                       & = \frac{1}{2}
+                \dfrac{5}{p_1} & = \dfrac{5}{1/3} = 15
             \end{align*}
-            Probability of 5th task from user 1 (first 4 slots are busy and not accepting from user 1).
-            \begin{align*}
-                P(\text{5th task from user 1}) & = \left(\frac{1}{2}\right)^5 \\
-                                               & = \frac{1}{32}
-            \end{align*}
-            Expected number of slots up to and including the 5th task from user 1 is the reciprocal of the probability of 5th task from user 1 $= 32$
         \end{solution}
         \part Find the expected number of busy slots up to and including the 5th task from
         user 1.
         \begin{solution}
-            In busy slots, there is probability $P_{1 | B} = \frac{2}{5}$ that a task from user 1 is executed. \\
-            Probability of 5th task from user 1 $ = \left(\frac{5}{6}\right)^5 \cdot \frac{2}{5} = 0.16075$ \\
-            Expected number of busy slots up to and including the 5th task from user 1 is the reciprocal of the probability of 5th task from user 1 $= \frac{1}{0.16075} = 6.219$
+            Each busy slot contains a task from user 1 with probability $p_{1|B} = \frac{2}{5}$, independent
+            of other slots. The random variable of interest is a Pascal random variable of order 5,
+            with parameter $p_{1|B} = \frac{2}{5}$. Its mean is
+            \begin{align*}
+                \dfrac{5}{p_{1 | B}} & = \dfrac{5}{2/5} = \dfrac{25}{2} = 12.5
+            \end{align*}
         \end{solution}
 
         \part Find the PMF, mean, and variance of the number of tasks from user 2 until the
         time of the 5th task from user 1.
         \begin{solution}
+            The number $T$ of tasks from user 2 until the 5th task from user 1 is the same as the
+            number $B$ of busy slots until the 5th task from user 1, minus 5. The number of busy
+            slots (“trials”) until the 5th task from user 1 (“success”) is a Pascal random variable
+            of order 5, with parameter $p_{1|B} = \frac{2}{5}$. Thus,
             \begin{align*}
-                \binom{k+r-1}{k} p^{k} (1-p)^{r}                                                              \\
-                p               & = \left( \frac{1}{6} + \frac{5}{6} \times \frac{3}{5} \right) = \frac{2}{3} \\
-                \binom{k+r-1}{k} \left(\frac{2}{3}\right)^{k} \left(\frac{1}{3}\right)^{r}                    \\
-                \text{Mean}     & = \frac{pr}{1-p} = 2r                                                       \\
-                \text{Variance} & = \frac{pr}{(1-p)^{2}} = 6r                                                 \\
+                p_B(t) & = \binom{t - 1}{4} \left(\dfrac{2}{5}\right)^5 \left(1 - \dfrac{2}{5}\right)^{t-5} & t = 5, 6, \dots \\
+            \end{align*}
+            Since $T = B - 5$, we have $p_T(t) = p_B(t + 5)$, and we obtain
+            \begin{align*}
+                p_r(t) & = \binom{t + 4}{4}  \left(\dfrac{2}{5}\right)^5 \left(1 - \dfrac{2}{5}\right)^{t} & t = 0, 1, \dots \\
+            \end{align*}
+            Using the formulas for the mean and the variance of the Pascal random variable $B$, we
+            obtain
+            \begin{align*}
+                E[T] = E[B] - 5 = \dfrac{25}{2} - 5 = 7.5
+            \end{align*}
+            and
+            \begin{align*}
+                \text{Var}(T) = \text{Var}(B) = \dfrac{5 (1 - (2/5))}{(2/5)^2} = 18.75
             \end{align*}
 
-            The expression $\binom{k+r-1}{k} p^{k} (1-p)^{r}$ represents the probability of
-            having $k$ successes and $r$ failures in a sequence of trials, where each trial
-            has a success probability of $p$ and a failure probability of $1-p$ (Binomial
-            distribution).
-
-            In this case, $p$ is calculated as $\left( \frac{1}{6} + \frac{5}{6} \times
-                \frac{3}{5} \right) = \frac{2}{3}$.
-
-            The mean and variance of this distribution are given by $\text{Mean} =
-                \frac{pr}{1-p} = 2r$ and $\text{Variance} = \frac{pr}{(1-p)^{2}} = 6r$,
-            respectively.
         \end{solution}
     \end{parts}
 \end{questions}
@@ -521,7 +516,7 @@
         \end{solution}
     \end{parts}
 
-    \question{textbf{11.41}}
+    \question{\textbf{11.41}}
 
     Consider the simple queueing system discussed in Example 11.36.
     \begin{parts}
@@ -562,15 +557,15 @@
             P[X(1.5) = 1, X(3) = 1 | X(0) = 0] \\
             P[X(1.5) = 1, X(3) = 1]
         \end{align*}
-        
+
         \begin{solution}
 
             \begin{align*}
-                &= P[X(3) = 1 | X(1.5) = 1, X(0) = 0] P[X(1.5) = 1 | X(0) = 0] \\
-                &= P[X(3) = 1 | X(1.5) = 1]P[X(1.5) = 1 | X(0) = 0] \\
-                &= p_{11}(1.5) p_{01}(1.5) \\
-                P[X(1.5) = 1, X(3) = 1] &= P[X(3)=1|X(1.5) = 1]P[X(1.5)=1] \\
-                &= p_{11}(1.5)\left[\dfrac{\alpha}{\alpha + \beta} + \left(p_{1}(0) - \dfrac{\alpha}{\alpha + \beta}\right)e ^{-(\alpha + \beta)1.5}\right]
+                                        & = P[X(3) = 1 | X(1.5) = 1, X(0) = 0] P[X(1.5) = 1 | X(0) = 0]                                                                              \\
+                                        & = P[X(3) = 1 | X(1.5) = 1]P[X(1.5) = 1 | X(0) = 0]                                                                                         \\
+                                        & = p_{11}(1.5) p_{01}(1.5)                                                                                                                  \\
+                P[X(1.5) = 1, X(3) = 1] & = P[X(3)=1|X(1.5) = 1]P[X(1.5)=1]                                                                                                          \\
+                                        & = p_{11}(1.5)\left[\dfrac{\alpha}{\alpha + \beta} + \left(p_{1}(0) - \dfrac{\alpha}{\alpha + \beta}\right)e ^{-(\alpha + \beta)1.5}\right]
             \end{align*}
 
         \end{solution}
@@ -612,8 +607,32 @@
 
         \part Find the stationary pmf. Explain how the pmf varies with $\lambda$
         \begin{solution}
-
-        \end{solution}
+            The transition probability matrix \( P \) is given by:
+            \[ P = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix} \]
+            
+            Let \( \pi_1, \pi_2, \pi_3 \) be the stationary probabilities for states Fully Charged, In Use, and Recharging, respectively.
+            
+            The stationary distribution \( \pi \) satisfies the equation \( \pi P = \pi \). Solving for \( \pi \), we get:
+            \[ \begin{bmatrix} \pi_1 & \pi_2 & \pi_3 \end{bmatrix} \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} \pi_1 & \pi_2 & \pi_3 \end{bmatrix} \]
+            
+            Now, let's consider the system of equations derived from the Markov chain:
+            \begin{align*}
+            1. & \quad \pi_1 = \pi_3 \\
+            2. & \quad \pi_2 = \pi_1 \\
+            3. & \quad \pi_3 = \pi_2
+            \end{align*}
+            
+            Substituting \( \pi_1 = \pi_3 \) from equation (1) into equations (2) and (3):
+            \begin{align*}
+            2. & \quad \pi_2 = \pi_1 = \pi_3 \\
+            3. & \quad \pi_3 = \pi_2 = \pi_1
+            \end{align*}
+            
+            This implies that \( \pi_1 = \pi_2 = \pi_3 \), and a possible solution is \( \pi_1 = \frac{1}{3} \), \( \pi_2 = \frac{1}{3} \), \( \pi_3 = \frac{1}{3} \).
+            
+            As \( \lambda \) increases, the mean time in the fully charged state decreases. Therefore, the stationary probabilities \( \pi_1, \pi_2, \pi_3 \) are influenced by \( \lambda \), and an increase in \( \lambda \) would lead to a decrease in \( \pi_1 \) and an increase in \( \pi_2 \) and \( \pi_3 \). The system tends to distribute more time across the in-use and recharging states as \( \lambda \) increases.
+            
+                    \end{solution}
 
     \end{parts}
 \end{questions}
