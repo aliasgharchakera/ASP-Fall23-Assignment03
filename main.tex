@@ -31,9 +31,12 @@
 
 \begin{document}
 \maketitle
-
+\section{Bertsekas and Tsitsiklis, Section 7.1}
 \begin{questions}
-    \question Dave fails quizzes with probability $\dfrac{1}{4}$, independent of other quizzes.
+    \question \textbf{Problem 2}
+
+    Dave fails quizzes with probability $\dfrac{1}{4}$, independent of other
+    quizzes.
     \begin{parts}
         \part What is the probability that Dave fails exactly two of the next six quizzes?
         \begin{solution}
@@ -87,12 +90,14 @@
         \end{solution}
     \end{parts}
 
-    \question A computer system carries out tasks submitted by two users. Time
-    is divided into slots. A slot can be idle, with probability $P_I = \frac{1}{6}$, and busy with
-    probability $P_B = \frac{5}{6}$. During a busy slot, there is probability $P_{1 | B} = \frac{2}{5}$ (respectively,
-    $P_{2 | B} = \frac{3}{5}$) that a task from user 1 (respectively, 2) is executed. We assume that
-    events related to different slots are independent. \\
-    $T_1 = $ Task from user 1.
+    \question \textbf{Problem 3}
+
+    A computer system carries out tasks submitted by two users. Time is divided
+    into slots. A slot can be idle, with probability $P_I = \frac{1}{6}$, and busy
+    with probability $P_B = \frac{5}{6}$. During a busy slot, there is probability
+    $P_{1 | B} = \frac{2}{5}$ (respectively, $P_{2 | B} = \frac{3}{5}$) that a task
+    from user 1 (respectively, 2) is executed. We assume that events related to
+    different slots are independent. \\ $T_1 = $ Task from user 1.
 
     \begin{parts}
         \part Find the probability that a task from user 1 is executed for the first time during
@@ -152,20 +157,37 @@
         time of the 5th task from user 1.
         \begin{solution}
             \begin{align*}
-                \binom{k+r-1}{k} p^{k} (1-p)^{r} \\
-                p &= \left( \frac{1}{6} + \frac{5}{6} \times \frac{3}{5} \right) = \frac{2}{3} \\
-                \binom{k+r-1}{k} \left(\frac{2}{3}\right)^{k} \left(\frac{1}{3}\right)^{r} \\
-                \text{Mean} &= \frac{pr}{1-p} = 2r \\
-                \text{Variance} &= \frac{pr}{(1-p)^{2}} = 6r \\
+                \binom{k+r-1}{k} p^{k} (1-p)^{r}                                                              \\
+                p               & = \left( \frac{1}{6} + \frac{5}{6} \times \frac{3}{5} \right) = \frac{2}{3} \\
+                \binom{k+r-1}{k} \left(\frac{2}{3}\right)^{k} \left(\frac{1}{3}\right)^{r}                    \\
+                \text{Mean}     & = \frac{pr}{1-p} = 2r                                                       \\
+                \text{Variance} & = \frac{pr}{(1-p)^{2}} = 6r                                                 \\
             \end{align*}
 
-            The expression $\binom{k+r-1}{k} p^{k} (1-p)^{r}$ represents the probability of having $k$ successes and $r$ failures in a sequence of trials, where each trial has a success probability of $p$ and a failure probability of $1-p$ (Binomial distribution). 
+            The expression $\binom{k+r-1}{k} p^{k} (1-p)^{r}$ represents the probability of
+            having $k$ successes and $r$ failures in a sequence of trials, where each trial
+            has a success probability of $p$ and a failure probability of $1-p$ (Binomial
+            distribution).
 
-            In this case, $p$ is calculated as $\left( \frac{1}{6} + \frac{5}{6} \times \frac{3}{5} \right) = \frac{2}{3}$.
+            In this case, $p$ is calculated as $\left( \frac{1}{6} + \frac{5}{6} \times
+                \frac{3}{5} \right) = \frac{2}{3}$.
 
-            The mean and variance of this distribution are given by $\text{Mean} = \frac{pr}{1-p} = 2r$ and $\text{Variance} = \frac{pr}{(1-p)^{2}} = 6r$, respectively.
+            The mean and variance of this distribution are given by $\text{Mean} =
+                \frac{pr}{1-p} = 2r$ and $\text{Variance} = \frac{pr}{(1-p)^{2}} = 6r$,
+            respectively.
         \end{solution}
     \end{parts}
+\end{questions}
+
+\section{Leon-Garcia, Section 11}
+\begin{questions}
+    \question \textbf{11.9}
+
+    Let $X_n$ be an iid integer-valued random process. Show that $X_n$ is a Markov process and
+    give its one-step transition probability matrix.
+    \begin{solution}
+        
+    \end{solution}
 \end{questions}
 
 \end{document}
