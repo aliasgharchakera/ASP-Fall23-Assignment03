@@ -7,6 +7,7 @@
 \usepackage{graphics}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
 
 % Header and footer.
 \pagestyle{headandfoot}
@@ -183,10 +184,129 @@
 \begin{questions}
     \question \textbf{11.9}
 
-    Let $X_n$ be an iid integer-valued random process. Show that $X_n$ is a Markov process and
-    give its one-step transition probability matrix.
+    Let $X_n$ be an iid integer-valued random process. Show that $X_n$ is a Markov
+    process and give its one-step transition probability matrix.
     \begin{solution}
-        
+        To show that random process $X_{n}$ is a markov process, I will show that the conditional probability distribution of the future states given present states depends only on the present state and not on sequence of previous states.
+            \\~\\
+            Let's denote the one-step transition probability matrix as $P$, where $P_{ij}$ = $P(X_{n+1} = j| X_{n} = i)$, i.e, the the probability of transitioning from state $i$ to state $j$ in one step. 
+            \\~\\
+            Since $X_{n}$ is an iid. We have: 
+            \\
+            $P(X_{n+1} = j| X_{n} = i,X_{n-1},X_{n-2},\ldots,X_{0} )$ = $P(X_{n+1} = j| X_{n} = i)$
+            \\
+            This is because $X_{n}$ being iid implies that the future values do not depend on the past values given the current state.
+            \\
+            Now let's compute $P_{ij}$, the probability of transitioning from state $i$ to state $j$ in one step. 
+            \\
+            $P_{ij}$ = $P(X_{n+1} = j | X_{n} = i)$
+            \\
+            Since $X_{n}$ is iid, this probability is same for all $n$. Therefore we can simply denote it as $P(X_{1} = j | X_{0} = i)$ which is one step transition probability. 
+            \\
+            So the one step transition probability matrix $P$ is given by 
+
+            \[
+P = \begin{bmatrix}
+    P(X_1 = 1 | X_0 = 1) & P(X_1 = 2 | X_0 = 1) & \ldots \\
+    P(X_1 = 1 | X_0 = 2) & P(X_1 = 2 | X_0 = 2) & \ldots \\
+    \vdots & \vdots & \ddots
+\end{bmatrix}
+\]
+This matrix will contain the probabilities of transitioning from one state to another in one step, and the independence of the random variables ensures that $x_{n}$ is a Markov process.
+
+\end{solution}
+
+    \question{\textbf{11.23}}
+
+    Show that if $P^k$ has identical rows, then $P^j$ has identical rows for all $j
+        \geq k$.
+    \begin{solution}
+        Let \(P\) be a transition matrix with identical rows, and let \(P^k\) be the matrix obtained by multiplying \(P\) by itself \(k\) times.
+
+        \(P^k = P\cdots P\)
+
+        Since \(P\) has identical rows, the \(i\)th row of \(P\) is equal to the
+        \(j\)th row of \(P\) for all \(i, j\).
+
+        Therefore, the \(i\)th row of \(P^k\) is equal to the \(j\)th row of \(P^k\)
+        for all \(i, j\).
+
+        This implies that \(P^k\) has identical rows.
+
+        Since \(P^k\) has identical rows, \(P^{k+1}\) must also have identical rows.
+
+        This implies that \(P^j\) has identical rows for all \(j \geq k\).
+    \end{solution}
+
+    \question{\textbf{11.24}}
+
+    Prove Eq. (11.14) by induction.
+
+    \(P(n) = P^n\)
+    \begin{solution}
+        \begin{align*}
+            P(1) & = P^1 = P                 \\
+            P(2) & = P^2 = P \cdot P = P^2   \\
+            P(3) & = P^3 = P \cdot P^2 = P^3 \\
+            P(4) & = P^4 = P \cdot P^3 = P^4 \\
+            \vdots
+        \end{align*}
+
+        The base case is \(P(1) = P^1 = P\).
+
+        Assume that \(P(k) = P^k\) for some \(k \geq 1\).
+
+        Then \(P(k+1) = P \cdot P^k = P^{k+1}\).
+
+        Therefore, \(P(n) = P^n\) for all \(n \geq 1\) by induction.
+    \end{solution}
+
+    \question{\textbf{11.30}}
+
+    Consider a random walk in the set $\{0, 1, \dots, M\}$ with transition
+    probabilities
+
+    \(p_{01} = 1, p_{M, M - 1} = 1, and p_{i, i - 1} = q, p_{i, i + 1} = p \text{ for } i = 1, \dots, M - 1\)
+
+    \begin{solution}
+
+        \begin{tikzpicture}[->, >=stealth, auto, semithick, node distance=2.5cm]
+            \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+            \node[circle, draw]    (A)                     {$0$};
+            \node[circle, draw]    (B)[right of=A]   {$1$};
+            \node[circle, draw]    (C)[right of=B]   {$2$};
+            \node    (D)[right of=C]   {$\cdots$};
+            \node[ellipse, draw]    (E)[right of=D]   {$M-1$};
+            \node[circle, draw]    (F)[right of=E]   {$M$};
+
+            \path
+            (A) edge[bend left]  node{$1$}         (B)
+            (B) edge[bend left]  node{$q$}         (A)
+            (B) edge[bend left]  node{$p$}         (C)
+            (C) edge[bend left]  node{$q$}         (B)
+            (E) edge[bend left]  node{$p$}         (F)
+            (F) edge[bend left]  node{$1$}         (E)
+            (C) edge[dotted]     node{}            (D)
+            (D) edge[dotted]     node{}            (E);
+        \end{tikzpicture}
+
+        % LaTeX for the equations
+        \begin{align*}
+            \text{This Markov chain has period 2} & \Rightarrow \pi_{i}(2n) = 2\pi_{i} \text{ as } n \rightarrow \infty                                                                                   \\
+            \pi_{0}                               & = q\pi_{1} \Rightarrow \pi_{1} = \frac{1}{q}\pi_{0}                                                                                                   \\
+            \pi_{1}                               & = \pi_{0} + q\pi_{2} \Rightarrow \pi_{2} = \left(\frac{1}{q} - 1\right)\pi_{0} = \frac{p}{q^{2}}\pi_{0}                                               \\
+            \pi_{2}                               & = \pi_{1} + q\pi_{3} \Rightarrow \pi_{3} = \left(\frac{1}{q}(\pi_{2} - \pi_{1})\right) = \frac{p}{q}\left(\frac{p}{q^{2}} - \frac{1}{q}\right)\pi_{0} \\
+                                                  & \vdots                                                                                                                                                \\
+            \pi_{M-1}                             & = p\pi_{M-2} + q\pi_{M}                                                                                                                               \\
+            \pi_{M}                               & = p\pi_{M-1}                                                                                                                                          \\
+            \pi_{M}                               & = \pi_{M-1} - p\pi_{M-2}                                                                                                                              \\
+                                                  & = \frac{1}{q}\left(\frac{p^{2}}{q^{2}}\right) \left(\frac{1}{q} - 1\right)\pi_{0} = \frac{p^{3}}{q^{4}}\pi_{0}                                      \\
+                                                  & \vdots                                                                                                                                                \\
+            \pi_{M}                               & = \pi_{M-1} - p\pi_{M-2}                                                                                                                              \\
+                                                  & = \left(\frac{p^{M-2}}{q^{M-1}} - p\frac{p^{M-3}}{q^{M-2}}\right)\pi_{0} \\
+                                                  & = \frac{p^{M-2}}{q^{M-1}}\left(\frac{1}{q} - 1\right)\pi_{0} \\
+        \end{align*}
+
     \end{solution}
 \end{questions}
 
