@@ -77,9 +77,9 @@
 
             $F =$ Fail, $P =$ Pass \\
             \begin{align*}
-                P(X) & = P(\text{Dave fails two quizzes in a row before he passes two quizzes in a row})            \\                                                                                                                       
-                     & = P(FF \cup PFF \cup FPFF \cup PFPFF \cup FPFPFF \cup \dots)                                 \\                                                                                                                      
-                     & = \dfrac{[P(F)]^2}{1 - P(F) \cdot P(P)} + \dfrac{P(P) \cdot [P(F)]^2}{1 - P(F) \cdot P(P)}   \\
+                P(X) & = P(\text{Dave fails two quizzes in a row before he passes two quizzes in a row})                                                                                 \\
+                     & = P(FF \cup PFF \cup FPFF \cup PFPFF \cup FPFPFF \cup \dots)                                                                                                      \\
+                     & = \dfrac{[P(F)]^2}{1 - P(F) \cdot P(P)} + \dfrac{P(P) \cdot [P(F)]^2}{1 - P(F) \cdot P(P)}                                                                        \\
                      & = \dfrac{\left(\frac{1}{4}\right)^2}{1 - \frac{1}{4} \cdot \frac{3}{4}} + \dfrac{\frac{3}{4} \cdot \left(\frac{1}{4}\right)^2}{1 - \frac{1}{4} \cdot \frac{3}{4}} \\
                      & = \dfrac{7}{52}
             \end{align*}
@@ -87,7 +87,85 @@
         \end{solution}
     \end{parts}
 
-    
+    \question A computer system carries out tasks submitted by two users. Time
+    is divided into slots. A slot can be idle, with probability $P_I = \frac{1}{6}$, and busy with
+    probability $P_B = \frac{5}{6}$. During a busy slot, there is probability $P_{1 | B} = \frac{2}{5}$ (respectively,
+    $P_{2 | B} = \frac{3}{5}$) that a task from user 1 (respectively, 2) is executed. We assume that
+    events related to different slots are independent. \\
+    $T_1 = $ Task from user 1.
+
+    \begin{parts}
+        \part Find the probability that a task from user 1 is executed for the first time during
+        the 4th slot.
+        \begin{solution}
+            If a task from user 1 is executed for the first time during the 4th slot, then the task from user 1 is not executed in the first 3 slots
+            (they are busy and not accepting from user 1) and is executed in the 4th slot (4th slot maybe idle and execute or busy and execute). \\
+            \begin{align*}
+                 & P(T_1 \text{ is executed for the first time during the 4th slot})                                                                                  \\
+                 & = P(T_1 \text{ is not executed in the first 3 slots}) \cdot P(T_1 \text{ is executed in the 4th slot})                                             \\
+                 & = \left(\frac{5}{6} \times \frac{3}{5}\right)^3 \cdot \left[\left(\frac{1}{6} \times 1\right) + \left(\frac{5}{6} \times \frac{2}{5}\right)\right] \\
+                 & = \left(\frac{1}{2}\right)^3 \cdot \left[\frac{1}{6} + \frac{1}{3}\right]                                                                          \\
+                 & = \frac{1}{8} \cdot \frac{1}{2}                                                                                                                    \\
+                 & = \frac{1}{16}                                                                                                                                     \\
+            \end{align*}
+        \end{solution}
+
+        \part Given that exactly 5 out of the first 10 slots were idle, find the probability that
+        the 6th idle slot is slot 12.
+        \begin{solution}
+            Since exactly 5 out of the first 10 slots were idle, therefore, the 11th slot is busy. \\
+            And since the slots are independent, \\
+            \begin{align*}
+                 & P(\text{6th idle slot is slot 12})                              \\
+                 & = P(\text{11th slot is busy}) \cdot P(\text{12th slot is idle}) \\
+                 & = \frac{5}{6} \times \frac{1}{6}                                \\
+                 & = \frac{5}{36}                                                  \\
+                 & = 0.138889
+            \end{align*}
+        \end{solution}
+
+        \part Find the expected number of slots up to and including the 5th task from user 1.
+        \begin{solution}
+            Probability of a task from user 1.
+            \begin{align*}
+                P(T_1) & = P_I \cdot P_{1|I} + P_B \cdot P_{1|B}               \\
+                       & = \frac{1}{6} \cdot 1 + \frac{5}{6} \cdot \frac{2}{5} \\
+                       & = \frac{1}{6} + \frac{1}{3}                           \\
+                       & = \frac{1}{2}
+            \end{align*}
+            Probability of 5th task from user 1 (first 4 slots are busy and not accepting from user 1).
+            \begin{align*}
+                P(\text{5th task from user 1}) & = \left(\frac{1}{2}\right)^5 \\
+                                               & = \frac{1}{32}
+            \end{align*}
+            Expected number of slots up to and including the 5th task from user 1 is the reciprocal of the probability of 5th task from user 1 $= 32$
+        \end{solution}
+        \part Find the expected number of busy slots up to and including the 5th task from
+        user 1.
+        \begin{solution}
+            In busy slots, there is probability $P_{1 | B} = \frac{2}{5}$ that a task from user 1 is executed. \\
+            Probability of 5th task from user 1 $ = \left(\frac{5}{6}\right)^5 \cdot \frac{2}{5} = 0.16075$ \\
+            Expected number of busy slots up to and including the 5th task from user 1 is the reciprocal of the probability of 5th task from user 1 $= \frac{1}{0.16075} = 6.219$
+        \end{solution}
+
+        \part Find the PMF, mean, and variance of the number of tasks from user 2 until the
+        time of the 5th task from user 1.
+        \begin{solution}
+            \begin{align*}
+                \binom{k+r-1}{k} p^{k} (1-p)^{r} \\
+                p &= \left( \frac{1}{6} + \frac{5}{6} \times \frac{3}{5} \right) = \frac{2}{3} \\
+                \binom{k+r-1}{k} \left(\frac{2}{3}\right)^{k} \left(\frac{1}{3}\right)^{r} \\
+                \text{Mean} &= \frac{pr}{1-p} = 2r \\
+                \text{Variance} &= \frac{pr}{(1-p)^{2}} = 6r \\
+            \end{align*}
+
+            The expression $\binom{k+r-1}{k} p^{k} (1-p)^{r}$ represents the probability of having $k$ successes and $r$ failures in a sequence of trials, where each trial has a success probability of $p$ and a failure probability of $1-p$ (Binomial distribution). 
+
+            In this case, $p$ is calculated as $\left( \frac{1}{6} + \frac{5}{6} \times \frac{3}{5} \right) = \frac{2}{3}$.
+
+            The mean and variance of this distribution are given by $\text{Mean} = \frac{pr}{1-p} = 2r$ and $\text{Variance} = \frac{pr}{(1-p)^{2}} = 6r$, respectively.
+        \end{solution}
+    \end{parts}
 \end{questions}
 
 \end{document}
