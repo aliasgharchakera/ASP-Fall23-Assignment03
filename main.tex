@@ -188,112 +188,118 @@
     process and give its one-step transition probability matrix.
     \begin{solution}
         To show that random process $X_{n}$ is a markov process, I will show that the conditional probability distribution of the future states given present states depends only on the present state and not on sequence of previous states.
-            \\~\\
-            Let's denote the one-step transition probability matrix as $P$, where $P_{ij}$ = $P(X_{n+1} = j| X_{n} = i)$, i.e, the the probability of transitioning from state $i$ to state $j$ in one step. 
-            \\~\\
-            Since $X_{n}$ is an iid. We have: 
-            \\
-            $P(X_{n+1} = j| X_{n} = i,X_{n-1},X_{n-2},\ldots,X_{0} )$ = $P(X_{n+1} = j| X_{n} = i)$
-            \\
-            This is because $X_{n}$ being iid implies that the future values do not depend on the past values given the current state.
-            \\
-            Now let's compute $P_{ij}$, the probability of transitioning from state $i$ to state $j$ in one step. 
-            \\
-            $P_{ij}$ = $P(X_{n+1} = j | X_{n} = i)$
-            \\
-            Since $X_{n}$ is iid, this probability is same for all $n$. Therefore we can simply denote it as $P(X_{1} = j | X_{0} = i)$ which is one step transition probability. 
-            \\
-            So the one step transition probability matrix $P$ is given by 
+        \\~\\
+        Let's denote the one-step transition probability matrix as $P$, where $P_{ij}$ = $P(X_{n+1} = j| X_{n} = i)$, i.e, the the probability of transitioning from state $i$ to state $j$ in one step.
+        \\~\\
+        Since $X_{n}$ is an iid. We have:
+        \\
+        $P(X_{n+1} = j| X_{n} = i,X_{n-1},X_{n-2},\ldots,X_{0} )$ = $P(X_{n+1} = j| X_{n} = i)$
+        \\
+        This is because $X_{n}$ being iid implies that the future values do not depend on the past values given the current state.
+        \\
+        Now let's compute $P_{ij}$, the probability of transitioning from state $i$ to state $j$ in one step.
+        \\
+        $P_{ij}$ = $P(X_{n+1} = j | X_{n} = i)$
+        \\
+        Since $X_{n}$ is iid, this probability is same for all $n$. Therefore we can simply denote it as $P(X_{1} = j | X_{0} = i)$ which is one step transition probability.
+        \\
+        So the one step transition probability matrix $P$ is given by
 
-            \[
-P = \begin{bmatrix}
-    P(X_1 = 1 | X_0 = 1) & P(X_1 = 2 | X_0 = 1) & \ldots \\
-    P(X_1 = 1 | X_0 = 2) & P(X_1 = 2 | X_0 = 2) & \ldots \\
-    \vdots & \vdots & \ddots
-\end{bmatrix}
-\]
-This matrix will contain the probabilities of transitioning from one state to another in one step, and the independence of the random variables ensures that $x_{n}$ is a Markov process.
+        \[
+            P = \begin{bmatrix}
+                P(X_1 = 1 | X_0 = 1) & P(X_1 = 2 | X_0 = 1) & \ldots \\
+                P(X_1 = 1 | X_0 = 2) & P(X_1 = 2 | X_0 = 2) & \ldots \\
+                \vdots               & \vdots               & \ddots
+            \end{bmatrix}
+        \]
+        This matrix will contain the probabilities of transitioning from one state to
+        another in one step, and the independence of the random variables ensures that
+        $x_{n}$ is a Markov process.
 
-\end{solution}
+    \end{solution}
 
-\question \textbf{11.20}
+    \question \textbf{11.20}
 
-    A certain part of a machine can be in two states: working or undergoing repair. A working part fails during the course of a day with probability $a$. A part undergoing repair is put into working order during the course of a day with probability b. Let 
-    $X_{n}$ be the state of the part.
+    A certain part of a machine can be in two states: working or undergoing repair.
+    A working part fails during the course of a day with probability $a$. A part
+    undergoing repair is put into working order during the course of a day with
+    probability b. Let $X_{n}$ be the state of the part.
     \begin{parts}
         \part Show that $X_{n}$ is a two-state Markov chain and give its one-step transition probability matrix $P$.
         \begin{solution}
-            Let $X_{n}$ be the state of the part at time $n$. To show that $X_{n}$ is a two state markov chain, we need to demonstrate that the probability of transitioning to the next state depends only on the current state, and not on the sequence of events that preceded it. 
+            Let $X_{n}$ be the state of the part at time $n$. To show that $X_{n}$ is a two state markov chain, we need to demonstrate that the probability of transitioning to the next state depends only on the current state, and not on the sequence of events that preceded it.
             \\
-            For a one step transition probability matrix $P$, its entries are given by: 
+            For a one step transition probability matrix $P$, its entries are given by:
             \begin{center}
-            $P_{ij} = P(X_{n+1} = j | X_{n} = i)$ 
+                $P_{ij} = P(X_{n+1} = j | X_{n} = i)$
             \end{center}
-            \\~\\
+
             The probability that a working part keeps working is:
-            
+
             \begin{center}
-            $P_{11} = P(X_{n+1} = 1 | X_{n} = 1) = 1 - a$
+                $P_{11} = P(X_{n+1} = 1 | X_{n} = 1) = 1 - a$
             \end{center}
-   \\~\\
-        
+
             The probability that a part being repaired, remains under repair:
-            
+
             \begin{center}
-            $P_{22} = P(X_{n+1} = 2 | X_{n} = 2) = 1 - b$
+                $P_{22} = P(X_{n+1} = 2 | X_{n} = 2) = 1 - b$
             \end{center}
-        \\ ~\\
-            The probability that a working part goes for repair is 
-            \\
+
+            The probability that a working part goes for repair is
+
             \begin{center}
-            $P_{21} = P(X_{n+1} = 2 | X_{n} = 1) = a$
+                $P_{21} = P(X_{n+1} = 2 | X_{n} = 1) = a$
             \end{center}
-            \\~\\
+
             The probability that a part being repaired is restored:
             \begin{center}
-            $P_{12} = P(X_{n+1} = 1 | X_{n} = 2) = b$
+                $P_{12} = P(X_{n+1} = 1 | X_{n} = 2) = b$
             \end{center}
-            \\~\\
-            Therefore the one step transition probability matrix $P$ is 
-            \\
+
+            Therefore the one step transition probability matrix $P$ is
+
             \[
-P = \begin{bmatrix}
-    1 - a & a \\
-    b & 1 - b
-\end{bmatrix}
-\]
+                P = \begin{bmatrix}
+                    1 - a & a     \\
+                    b     & 1 - b
+                \end{bmatrix}
+            \]
         \end{solution}
 
         \part Find the n-step transition probability matrix $P^{n}$.
         \begin{solution}
 
-The $n$-step transition probability matrix $P^n$ is given by:
-\[
-P^n = \underbrace{P \cdot P \cdot \ldots \cdot P}_{\text{n times}}
-\]
-
-The general formula for each element $P_{ij}^n$ in $P^n$ is obtained by considering all possible paths from state $i$ to state $j$ in $n$ steps. The $k$-th element of the resulting matrix is given by the sum of products of elements from corresponding positions in matrices $P^k$, where $k$ varies from 1 to $n$.
-\\
-
-        
             The $n$-step transition probability matrix $P^n$ is given by:
-\[
-P^n = \begin{bmatrix} (1 - a)^n + (ab)^n & a(1 - b)^n + (1 - a)b^n \\ b(1 - a)^n + (1 - b)a^n & (1 - b)^n + (ab)^n \end{bmatrix}
-\]
+            \[
+                P^n = \underbrace{P \cdot P \cdot \ldots \cdot P}_{\text{n times}}
+            \]
+
+            The general formula for each element $P_{ij}^n$ in $P^n$ is obtained by
+            considering all possible paths from state $i$ to state $j$ in $n$ steps. The
+            $k$-th element of the resulting matrix is given by the sum of products of
+            elements from corresponding positions in matrices $P^k$, where $k$ varies from
+            1 to $n$. \\
+
+            The $n$-step transition probability matrix $P^n$ is given by:
+            \[
+                P^n = \begin{bmatrix} (1 - a)^n + (ab)^n & a(1 - b)^n + (1 - a)b^n \\ b(1 - a)^n + (1 - b)a^n & (1 - b)^n + (ab)^n \end{bmatrix}
+            \]
         \end{solution}
 
         \part Find the steady state probability for each of two states.
         \begin{solution}
             The steady state probability vector \(\pi\) satisfies the equation \(\pi P = \pi\), where \(\pi\) is a row vector. The steady state probabilities can be found by solving this system of equations.
 
-For the two-state Markov chain, the steady state probability vector \(\pi\) is:
+            For the two-state Markov chain, the steady state probability vector \(\pi\) is:
 
-\[ \pi = \left( \frac{b}{a + b}, \frac{a}{a + b} \right) \]
+            \[ \pi = \left( \frac{b}{a + b}, \frac{a}{a + b} \right) \]
 
-This vector represents the long-term proportion of time the system spends in each state.
+            This vector represents the long-term proportion of time the system spends in
+            each state.
 
         \end{solution}
-        
+    \end{parts}
 
     \question{\textbf{11.23}}
 
@@ -346,47 +352,76 @@ This vector represents the long-term proportion of time the system spends in eac
     probabilities
 
     \(p_{01} = 1, p_{M, M - 1} = 1, and p_{i, i - 1} = q, p_{i, i + 1} = p \text{ for } i = 1, \dots, M - 1\)
+    \begin{parts}
+        \part Sketch the state transition diagram.
+        \begin{solution}
 
-    \begin{solution}
+            \begin{tikzpicture}[->, >=stealth, auto, semithick, node distance=2.5cm]
+                \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+                \node[circle, draw]    (A)                     {$0$};
+                \node[circle, draw]    (B)[right of=A]   {$1$};
+                \node[circle, draw]    (C)[right of=B]   {$2$};
+                \node    (D)[right of=C]   {$\cdots$};
+                \node[ellipse, draw]    (E)[right of=D]   {$M-1$};
+                \node[circle, draw]    (F)[right of=E]   {$M$};
 
-        \begin{tikzpicture}[->, >=stealth, auto, semithick, node distance=2.5cm]
-            \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
-            \node[circle, draw]    (A)                     {$0$};
-            \node[circle, draw]    (B)[right of=A]   {$1$};
-            \node[circle, draw]    (C)[right of=B]   {$2$};
-            \node    (D)[right of=C]   {$\cdots$};
-            \node[ellipse, draw]    (E)[right of=D]   {$M-1$};
-            \node[circle, draw]    (F)[right of=E]   {$M$};
+                \path
+                (A) edge[bend left]  node{$1$}         (B)
+                (B) edge[bend left]  node{$q$}         (A)
+                (B) edge[bend left]  node{$p$}         (C)
+                (C) edge[bend left]  node{$q$}         (B)
+                (E) edge[bend left]  node{$p$}         (F)
+                (F) edge[bend left]  node{$1$}         (E)
+                (C) edge[dotted]     node{}            (D)
+                (D) edge[dotted]     node{}            (E);
+            \end{tikzpicture}
+        \end{solution}
+    \end{parts}
 
-            \path
-            (A) edge[bend left]  node{$1$}         (B)
-            (B) edge[bend left]  node{$q$}         (A)
-            (B) edge[bend left]  node{$p$}         (C)
-            (C) edge[bend left]  node{$q$}         (B)
-            (E) edge[bend left]  node{$p$}         (F)
-            (F) edge[bend left]  node{$1$}         (E)
-            (C) edge[dotted]     node{}            (D)
-            (D) edge[dotted]     node{}            (E);
-        \end{tikzpicture}
+    \question{\textbf{11.37}}
 
-        % LaTeX for the equations
-        \begin{align*}
-            \text{This Markov chain has period 2} & \Rightarrow \pi_{i}(2n) = 2\pi_{i} \text{ as } n \rightarrow \infty                                                                                   \\
-            \pi_{0}                               & = q\pi_{1} \Rightarrow \pi_{1} = \frac{1}{q}\pi_{0}                                                                                                   \\
-            \pi_{1}                               & = \pi_{0} + q\pi_{2} \Rightarrow \pi_{2} = \left(\frac{1}{q} - 1\right)\pi_{0} = \frac{p}{q^{2}}\pi_{0}                                               \\
-            \pi_{2}                               & = \pi_{1} + q\pi_{3} \Rightarrow \pi_{3} = \left(\frac{1}{q}(\pi_{2} - \pi_{1})\right) = \frac{p}{q}\left(\frac{p}{q^{2}} - \frac{1}{q}\right)\pi_{0} \\
-                                                  & \vdots                                                                                                                                                \\
-            \pi_{M-1}                             & = p\pi_{M-2} + q\pi_{M}                                                                                                                               \\
-            \pi_{M}                               & = p\pi_{M-1}                                                                                                                                          \\
-            \pi_{M}                               & = \pi_{M-1} - p\pi_{M-2}                                                                                                                              \\
-                                                  & = \frac{1}{q}\left(\frac{p^{2}}{q^{2}}\right) \left(\frac{1}{q} - 1\right)\pi_{0} = \frac{p^{3}}{q^{4}}\pi_{0}                                      \\
-                                                  & \vdots                                                                                                                                                \\
-            \pi_{M}                               & = \pi_{M-1} - p\pi_{M-2}                                                                                                                              \\
-                                                  & = \left(\frac{p^{M-2}}{q^{M-1}} - p\frac{p^{M-3}}{q^{M-2}}\right)\pi_{0} \\
-                                                  & = \frac{p^{M-2}}{q^{M-1}}\left(\frac{1}{q} - 1\right)\pi_{0} \\
-        \end{align*}
+    Consider a Markov chain with state space and the following transition
+    probabilities:
 
-    \end{solution}
+    \(P_{jj + 1} = a_j\) and \(p_{j1} = 1 - a_j\) where \(0 < a_j < 1\)
+    \begin{parts}
+        \part Sketch the state transition diagram.
+        \begin{solution}
+
+            \begin{tikzpicture}[->, >=stealth, auto, semithick, node distance=2cm]
+                \tikzstyle{every state}=[fill=white, draw=black, thick, text=black, scale=1]
+
+                % Define the states
+                \node[circle, draw] (1) {$1$};
+                \node[circle, draw] (2) [right of=1] {$2$};
+                \node[circle, draw] (3) [right of=2] {$3$};
+                \node        (dots) [right of=3] {$\cdots$};
+                \node[ellipse, draw] (n-1) [right of=dots] {$n-1$};
+                \node[circle, draw] (n) [right of=n-1] {$n$};
+                \node (dots2) [right of=n, node distance=1cm] {$\cdots$};
+
+                % Connect the states with arrows
+                \draw (1) to[bend left] node[midway, above] {$a_1$} (2);
+                \draw (2) to[bend left] node[midway, above] {$a_2$} (3);
+                \draw (3) to[bend left] node[midway, above] {$a_3$} (dots);
+                % \draw (dots) to[bend left] node[midway, above] {$a_{n-1}$} (n-1);
+                \draw (n-1) to[bend left] node[midway, above] {$a_{n - 1}$} (n);
+
+                \draw (2) to[bend left] node[above] {$1-a_2$} (1);
+                \draw (3) to[bend left] node[midway, above] {$1-a_3$} (1);
+                \draw (n-1) to[bend left] node[midway, above] {$1-a_{n-1}$} (1);
+                \draw (n) to[bend left] node[midway, below] {$1-a_{n}$} (1);
+
+                \draw (1) to[loop] node[midway, above] {$1-a_1$} (1);
+
+            \end{tikzpicture}
+        \end{solution}
+
+        \part Determine whether the Markov chain is irreducible.
+        \begin{solution}
+            The Markov chain is irreducible if there is a path from every state to every other state. In this case, there is a path from every state to every other state, so the Markov chain is irreducible.
+        \end{solution}
+    \end{parts}
 \end{questions}
 
 \end{document}
