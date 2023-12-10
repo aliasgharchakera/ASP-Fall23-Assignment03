@@ -447,7 +447,8 @@
         \part Sketch the state transition diagram.
         \begin{solution}
 
-            Since the transition probabilities of \(p_{01} \text{ and } p_{M, M - 1} = 1\implies p_{10}\) and \(p_{M - 1, M} = 0\)
+            Since the transition probabilities of \(p_{01} \text{ and } p_{M, M - 1} =
+            1\implies p_{10}\) and \(p_{M - 1, M} = 0\)
 
             Therefore, the state transition diagram is:
 
@@ -520,9 +521,67 @@
         \end{solution}
     \end{parts}
 
+    \question{textbf{11.41}}
+
+    Consider the simple queueing system discussed in Example 11.36.
+    \begin{parts}
+        \part  Use the results in Example 11.36 to find the state transition probability matrix
+        \begin{solution}
+            From Ex 11.36 we have,
+
+            \begin{align*}
+                p_{o}{(t)} = \frac{\beta}{\alpha + \beta} + (p_{o}{(0)} - \frac{\beta}{\alpha + \beta}) e^{-(\alpha - \beta)t} \\
+                p_{1}{(t)} = \frac{\beta}{\alpha + \beta} + (p_{1}{(0)} - \frac{\beta}{\alpha +
+                    \beta}) e^{-(\alpha - \beta)t}
+            \end{align*}
+
+            Now if we suppose the initial state is 0, then $p_{0}(0) = 1 \implies$
+            \begin{align*}
+                p_{00}(t) & = \frac{\beta}{\alpha + \beta} + (1 - \frac{\beta}{\alpha + \beta})
+                e^{-(\alpha - \beta)t} = \frac{\beta + \alpha e^{-(\alpha + \beta)t}}{\alpha +
+                \beta}                                                                          \\
+                p_{01}(t) & = 1 - p_{00}(t) = \frac{\alpha(1-e^{-(\alpha+\beta)t})}{\alpha +
+                \beta}
+            \end{align*}
+            If the initial state is 1, then $p_{1}(0) = 1 \implies$
+            \begin{align*}
+                p_{11}(t) & = \frac{\alpha}{\alpha + \beta} + (1 + \frac{\alpha}{\alpha +
+                    \beta})e^{-(\alpha + \beta)t} = \frac{\alpha + \beta e^{-(\alpha +
+                \beta)t}}{\alpha + \beta}                                                                                                  \\
+                p_{10}(t) & = 1 - p_{11}(t) = \frac{\beta(1-e^{-(\alpha+\beta)t})}{\alpha+\beta}                                           \\
+                P(t)      & = \frac{1}{\alpha + \beta} \begin{bmatrix}
+                                                           \beta + \alpha e^{-(\alpha+\beta)t} & \alpha(1 - e^{-(\alpha + \beta)t})    \\
+                                                           \beta (1 - e^{-(\alpha + \beta)t})  & \alpha + \beta e^{-(\alpha + \beta)t}
+                                                       \end{bmatrix}
+            \end{align*}
+        \end{solution}
+
+        \part Find the following probabilities:
+
+        \begin{align*}
+            P[X(1.5) = 1, X(3) = 1 | X(0) = 0] \\
+            P[X(1.5) = 1, X(3) = 1]
+        \end{align*}
+        
+        \begin{solution}
+
+            \begin{align*}
+                &= P[X(3) = 1 | X(1.5) = 1, X(0) = 0] P[X(1.5) = 1 | X(0) = 0] \\
+                &= P[X(3) = 1 | X(1.5) = 1]P[X(1.5) = 1 | X(0) = 0] \\
+                &= p_{11}(1.5) p_{01}(1.5) \\
+                P[X(1.5) = 1, X(3) = 1] &= P[X(3)=1|X(1.5) = 1]P[X(1.5)=1] \\
+                &= p_{11}(1.5)\left[\dfrac{\alpha}{\alpha + \beta} + \left(p_{1}(0) - \dfrac{\alpha}{\alpha + \beta}\right)e ^{-(\alpha + \beta)1.5}\right]
+            \end{align*}
+
+        \end{solution}
+    \end{parts}
+
     \question{\textbf{11.42}}
-    
-    A rechargeable battery in a depot is in one of three states: fully charged, in use, or recharging. Assume the mean time in each of these states is: $\frac{1}{\lambda}$; 1 hour; 3 hours. Batteries are not put into use unless they are fully charged.
+
+    A rechargeable battery in a depot is in one of three states: fully charged, in
+    use, or recharging. Assume the mean time in each of these states is:
+    $\frac{1}{\lambda}$; 1 hour; 3 hours. Batteries are not put into use unless
+    they are fully charged.
 
     \begin{parts}
         \part Find a Markov model for the battery states and sketch the state transition diagram.
@@ -548,14 +607,14 @@
                 (B) edge[bend left]  node{$1$}         (C)
                 (C) edge[bend left]  node{$1$}         (A);
             \end{tikzpicture}
-            
+
         \end{solution}
 
         \part Find the stationary pmf. Explain how the pmf varies with $\lambda$
         \begin{solution}
-            
+
         \end{solution}
-        
+
     \end{parts}
 \end{questions}
 
