@@ -301,6 +301,86 @@
         \end{solution}
     \end{parts}
 
+    \question \textbf{11.22}
+
+    A stochastic matrix is defined as a nonnegative matrix for which the elements of each row add to one.
+
+    \begin{parts}
+        \part Show that the transition probability matrix $P$ for a Markov chain is a stochastic matrix.
+        \begin{solution}
+            To show that the transition probability matrix $P$ for a Markov chain is a stochastic matrix, we need to demonstrate two things:
+
+\begin{enumerate}
+    \item All elements of $P$ are nonnegative.
+    \item The elements of each row of $P$ add up to one.
+\end{enumerate}
+
+Let $P = [p_{ij}]$ be the transition probability matrix for a Markov chain, where $p_{ij}$ represents the probability of transitioning from state $i$ to state $j$.
+
+\textbf{1. Nonnegativity:}
+For a stochastic matrix, all elements must be nonnegative. In the context of a transition probability matrix, probabilities must be between 0 and 1. Therefore, $0 \leq p_{ij} \leq 1$ for all $i, j$.
+
+\textbf{2. Row Sum:}
+The second condition is that the sum of the elements in each row of $P$ must be equal to 1. Mathematically, for each row $i$:
+\[ \sum_{j} p_{ij} = 1 \]
+
+This condition ensures that the system moves to a new state with certainty (probability 1) from the current state, reflecting the Markov property.
+
+Combining both conditions, we can say that $P$ is a stochastic matrix if and only if:
+\begin{enumerate}
+    \item $p_{ij} \geq 0$ for all $i, j$.
+    \item $\sum_{j} p_{ij} = 1$ for all $i$.
+\end{enumerate}
+
+Given that $P$ is a valid transition probability matrix, it satisfies both of these conditions and is therefore a stochastic matrix.
+
+        \end{solution}
+
+        \part Show that if $P$ and $Q$ are stochastic matrices, then $PQ$ is also a stochastic matrix.
+    \begin{solution}
+        To show that if $P$ and $Q$ are stochastic matrices, then $PQ$ is also a stochastic matrix, we need to verify the two conditions for a matrix to be stochastic:
+
+\begin{enumerate}
+    \item All elements of $PQ$ are nonnegative.
+    \item The elements of each row of $PQ$ add up to one.
+\end{enumerate}
+
+Let $P$ be an $m \times n$ matrix and $Q$ be an $n \times p$ matrix. The product $PQ$ is an $m \times p$ matrix.
+
+\textbf{1. Nonnegativity:}
+For each element $(PQ)_{ij}$ of $PQ$, it is obtained by taking the dot product of the $i$-th row of $P$ and the $j$-th column of $Q$. Since both $P$ and $Q$ are stochastic matrices, all their elements are nonnegative. The dot product of nonnegative vectors (rows of $P$ and columns of $Q$) will also be nonnegative. Therefore, all elements of $PQ$ are nonnegative.
+
+\textbf{2. Row Sum:}
+For each row $i$ of $PQ$, the sum of its elements $(PQ)_{ij}$ is given by the dot product of the $i$-th row of $P$ and all columns of $Q$. Since the row sums of $P$ and $Q$ are both equal to 1 (due to them being stochastic matrices), the dot product of the rows of $P$ with the columns of $Q$ will also have a sum equal to 1. Therefore, the elements of each row of $PQ$ add up to one.
+
+Combining both conditions, we can conclude that if $P$ and $Q$ are stochastic matrices, then $PQ$ is also a stochastic matrix.
+
+    \end{solution}
+    
+    \part Show that if $P$ is a stochastic matrix, then $P^{n}$ is also a stochastic matrix.
+    \begin{solution}
+        To show that if $P$ is a stochastic matrix, then $P^n$ is also a stochastic matrix for any positive integer $n$, we need to verify the two conditions for a matrix to be stochastic:
+
+\begin{enumerate}
+    \item All elements of $P^n$ are nonnegative.
+    \item The elements of each row of $P^n$ add up to one.
+\end{enumerate}
+
+Let $P$ be an $m \times m$ stochastic matrix.
+
+\textbf{1. Nonnegativity:}
+Each element $(P^n)_{ij}$ of $P^n$ is obtained by taking the dot product of the $i$-th row of $P^n$ and the $j$-th column of $P^n$. Since $P$ is a stochastic matrix, all its elements are nonnegative. The dot product of nonnegative vectors (rows of $P^n$) will also be nonnegative. Therefore, all elements of $P^n$ are nonnegative.
+
+\textbf{2. Row Sum:}
+For each row $i$ of $P^n$, the sum of its elements $(P^n)_{ij}$ is given by the dot product of the $i$-th row of $P^n$ and all columns of $P^n$. We can express $P^n$ as the product $P \cdot P \cdot \ldots \cdot P$, where $P$ is multiplied by itself $n$ times.
+
+Since each row of $P$ adds up to one (as $P$ is stochastic), the dot product of the rows of $P^n$ with the columns of $P^n$ will also have a sum equal to 1. Therefore, the elements of each row of $P^n$ add up to one.
+
+Combining both conditions, we can conclude that if $P$ is a stochastic matrix, then $P^n$ is also a stochastic matrix for any positive integer $n$.
+    \end{solution}
+    
+    \end{parts}
+
     \question{\textbf{11.23}}
 
     Show that if $P^k$ has identical rows, then $P^j$ has identical rows for all $j
