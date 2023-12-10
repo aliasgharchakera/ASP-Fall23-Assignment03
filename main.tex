@@ -216,6 +216,85 @@ This matrix will contain the probabilities of transitioning from one state to an
 
 \end{solution}
 
+\question \textbf{11.20}
+
+    A certain part of a machine can be in two states: working or undergoing repair. A working part fails during the course of a day with probability $a$. A part undergoing repair is put into working order during the course of a day with probability b. Let 
+    $X_{n}$ be the state of the part.
+    \begin{parts}
+        \part Show that $X_{n}$ is a two-state Markov chain and give its one-step transition probability matrix $P$.
+        \begin{solution}
+            Let $X_{n}$ be the state of the part at time $n$. To show that $X_{n}$ is a two state markov chain, we need to demonstrate that the probability of transitioning to the next state depends only on the current state, and not on the sequence of events that preceded it. 
+            \\
+            For a one step transition probability matrix $P$, its entries are given by: 
+            \begin{center}
+            $P_{ij} = P(X_{n+1} = j | X_{n} = i)$ 
+            \end{center}
+            \\~\\
+            The probability that a working part keeps working is:
+            
+            \begin{center}
+            $P_{11} = P(X_{n+1} = 1 | X_{n} = 1) = 1 - a$
+            \end{center}
+   \\~\\
+        
+            The probability that a part being repaired, remains under repair:
+            
+            \begin{center}
+            $P_{22} = P(X_{n+1} = 2 | X_{n} = 2) = 1 - b$
+            \end{center}
+        \\ ~\\
+            The probability that a working part goes for repair is 
+            \\
+            \begin{center}
+            $P_{21} = P(X_{n+1} = 2 | X_{n} = 1) = a$
+            \end{center}
+            \\~\\
+            The probability that a part being repaired is restored:
+            \begin{center}
+            $P_{12} = P(X_{n+1} = 1 | X_{n} = 2) = b$
+            \end{center}
+            \\~\\
+            Therefore the one step transition probability matrix $P$ is 
+            \\
+            \[
+P = \begin{bmatrix}
+    1 - a & a \\
+    b & 1 - b
+\end{bmatrix}
+\]
+        \end{solution}
+
+        \part Find the n-step transition probability matrix $P^{n}$.
+        \begin{solution}
+
+The $n$-step transition probability matrix $P^n$ is given by:
+\[
+P^n = \underbrace{P \cdot P \cdot \ldots \cdot P}_{\text{n times}}
+\]
+
+The general formula for each element $P_{ij}^n$ in $P^n$ is obtained by considering all possible paths from state $i$ to state $j$ in $n$ steps. The $k$-th element of the resulting matrix is given by the sum of products of elements from corresponding positions in matrices $P^k$, where $k$ varies from 1 to $n$.
+\\
+
+        
+            The $n$-step transition probability matrix $P^n$ is given by:
+\[
+P^n = \begin{bmatrix} (1 - a)^n + (ab)^n & a(1 - b)^n + (1 - a)b^n \\ b(1 - a)^n + (1 - b)a^n & (1 - b)^n + (ab)^n \end{bmatrix}
+\]
+        \end{solution}
+
+        \part Find the steady state probability for each of two states.
+        \begin{solution}
+            The steady state probability vector \(\pi\) satisfies the equation \(\pi P = \pi\), where \(\pi\) is a row vector. The steady state probabilities can be found by solving this system of equations.
+
+For the two-state Markov chain, the steady state probability vector \(\pi\) is:
+
+\[ \pi = \left( \frac{b}{a + b}, \frac{a}{a + b} \right) \]
+
+This vector represents the long-term proportion of time the system spends in each state.
+
+        \end{solution}
+        
+
     \question{\textbf{11.23}}
 
     Show that if $P^k$ has identical rows, then $P^j$ has identical rows for all $j
